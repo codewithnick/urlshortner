@@ -1,12 +1,10 @@
-// pages/api/shorten.js
-import dbConnect from '../../utils/dbConnect';
+import { NextApiRequest, NextApiResponse } from 'next';
+import dbConnect from '../../utils/dbconnect';
 import Url from '../../models/Url';
+import { IUrl } from '../../models/Url';
 
-export default async function handler(req, res) {
-  
-    await dbConnect();  
-  
-  
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  await dbConnect();
   const { originalUrl } = req.body;
 
   if (!originalUrl) {
@@ -19,11 +17,12 @@ export default async function handler(req, res) {
     if (url) {
       res.status(200).json(url);
     } else {
-      url = new Url({ originalUrl });
+      url = new Url({ originalUrl } as IUrl);
       await url.save();
       res.status(201).json(url);
     }
   } catch (error) {
+    console.error('Error:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 }

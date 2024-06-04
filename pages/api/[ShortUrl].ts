@@ -1,12 +1,13 @@
-import dbConnect from '../../utils/dbConnect';
+import { NextApiRequest, NextApiResponse } from 'next';
+import dbConnect from '../../utils/dbconnect';
 import Url from '../../models/Url';
 
-export default async function handler(req, res) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   await dbConnect();
-  const { ShortUrl } = req.query;
+  const { shortUrl } = req.query;
 
   try {
-    const url = await Url.findOne({ shortUrl:ShortUrl });
+    const url = await Url.findOne({ shortUrl });
 
     if (url) {
       res.redirect(url.originalUrl);
