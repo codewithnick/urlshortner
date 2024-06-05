@@ -22,9 +22,6 @@ async function dbConnect() {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       bufferCommands: false,
-      bufferMaxEntries: 0,
-      useFindAndModify: false,
-      useCreateIndex: true,
     };
 
     mongoose.set('debug', true); // Enable debugging in Mongoose

@@ -4,10 +4,10 @@ import Url from '../../models/Url';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   await dbConnect();
-  const { shortUrl } = req.query;
+  const { ShortUrl } = req.query;
 
   try {
-    const url = await Url.findOne({ shortUrl });
+    const url = await Url.findOne({ shortUrl:ShortUrl });
 
     if (url) {
       res.redirect(url.originalUrl);
