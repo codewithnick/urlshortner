@@ -10,7 +10,7 @@ export interface IUrl extends Document {
 const UrlSchema: Schema = new Schema({
   originalUrl: { type: String, required: true },
   shortUrl: { type: String, required: true, default: shortid.generate },
-  createdAt: { type: Date, default: Date.now, expires: '30d' },
+  createdAt: { type: Date, default: Date.now, expires: '31d' },
 });
 
 export default mongoose.models.Url || mongoose.model<IUrl>('Url', UrlSchema);
