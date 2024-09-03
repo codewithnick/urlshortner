@@ -12,7 +12,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (url) {
       res.redirect(url.originalUrl);
     } else {
-      res.status(404).json({ error: 'URL not found' });
+      //render a client component for 404 page
+      res.redirect('/404');
     }
   } catch (error) {
     console.error('Error:', error);

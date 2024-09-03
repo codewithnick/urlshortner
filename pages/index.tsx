@@ -43,13 +43,35 @@ export default function Home() {
           className={styles.input}
         />
         <button type="submit" className={styles.button}>Shorten</button>
+        {!shortUrl && (
+            <img 
+            style={{
+              maxWidth: '300px',
+              borderRadius: '10px',
+            }} 
+            src="lookUp.gif" 
+            alt="Please Enter Your Link" 
+          />
+        )}
       </form>
       {shortUrl && (
         <div className={styles.result}>
-          <h2 className={styles.subHeader}>Shortened URL:</h2>
-          <a href={shortUrl} target="_blank" rel="noopener noreferrer" className={styles.link}>
-            {shortUrl}
-          </a>
+          <div>
+            <h2 className={styles.subHeader}>Shortened URL:</h2>
+            <a href={shortUrl} target="_blank" rel="noopener noreferrer" className={styles.link}>
+              {shortUrl}
+            </a>
+          </div>
+          {shortUrl && (
+            <img
+            style={{
+              maxWidth: '300px',
+              borderRadius: '10px',
+            }}
+            src="dance.gif"
+            alt="Yayy link Converted"
+          />
+          )}
         </div>
       )}
     </div>
