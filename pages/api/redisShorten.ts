@@ -1,10 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import getRedisClient from '../../utils/redisConnect';
-import { createShortUrl, getOriginalUrl } from '../../models/redisUrl';
-
+import { createShortUrl,getOriginalUrl } from '../../models/redisUrl';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  let rediclient=await getRedisClient();
   const { originalUrl } = req.body;
 
   if (!originalUrl) {
@@ -17,8 +14,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (url) {
       res.status(200).json(url);
     } else {
-      let newurl = await createShortUrl(originalUrl);
-      res.status(201).json(newurl);
+      let url= await createShortUrl(originalUrl);
+      res.status(201).json(url);
     }
   } catch (error) {
     console.error('Error:', error);

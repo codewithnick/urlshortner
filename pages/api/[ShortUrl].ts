@@ -1,16 +1,15 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import dbConnect from '../../utils/dbconnect';
-import Url from '../../models/Url';
+import { getOriginalUrl } from '../../models/redisUrl';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  await dbConnect();
+
   const { ShortUrl } = req.query;
 
   try {
-    const url = await Url.findOne({ shortUrl:ShortUrl });
+    const url = await getOriginalUrl(ShortUrl as string);
 
     if (url) {
-      res.redirect(url.originalUrl);
+      res.redirect(url);
     } else {
       //render a client component for 404 page
       res.redirect('/404');
